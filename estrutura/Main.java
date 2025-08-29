@@ -1,0 +1,72 @@
+package estrutura;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import exceptions.EntradaVaziaException;
+import exceptions.PlaylistInvalidaException;
+
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Scanner scanner = new Scanner(System.in);
+        
+        Sistema sistema = new Sistema();
+        int opcao = 0;
+
+        do {
+            try {
+                System.out.println("\n===== MENU =====");
+                System.out.println("1 - Criar Usuário");
+                System.out.println("2 - Criar Playlist");
+                System.out.println("3 - Remover Playlist");// Remover PL especifica.
+                System.out.println("4 - Listar Playlists ou uma especifica"); // Listar todas as PL ou uma especifica (listar as midias).
+                System.out.println("5 - Adicionar midia ao catalogo"); // Add midia ao catalogo global.
+                System.out.println("6 - Adicionar midia a uma playlist"); // Add midia a uma PL especifica.
+                System.out.println("7 - Remover midia"); // Remover midia de uma PL ou do catalogo(Interfere TODAS as playlist).
+                System.out.println("8 - Listar midias"); 
+                System.out.println("9 - Buscar midia"); // Busca midia por titulo, artista ou genero.
+                System.out.println("10 - Sair");
+                System.out.print("Escolha uma opção: ");
+
+                opcao = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (opcao) {
+                    case 1 -> {
+                        sistema.criarUsuario(scanner);
+                    }
+                    case 2 -> {
+                        sistema.criarPlaylist(scanner);
+                    }
+                    case 3 -> {
+                        System.out.print("Digite o nome da playlist a ser removida: ");
+                        String playlistRemover = scanner.nextLine();
+                     //   sistema.removerPlaylist(playlistRemover);
+                    }
+                    case 4 -> {
+                        sistema.listarPlaylists(scanner);
+                    }
+                    case 5 -> {
+                        sistema.adicionarMidiaCatalogo(scanner);
+                    }
+                    
+                    
+                    case 10 -> System.out.println("Saindo do sistema...");
+                    default -> System.out.println("Opção inválida.");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Digite um número.");
+                scanner.nextLine();
+            } catch (EntradaVaziaException e) {
+                System.out.println("Erro: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
+            }
+        } while (opcao != 9);
+
+        scanner.close();
+    }
+}
