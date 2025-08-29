@@ -34,8 +34,18 @@ Representa um podcast.
 
 ---
 
-## Como Executar 🚀
+## Tecnologias Utilizadas 🛠️
+- **Java 17+**
+- **Paradigma de Programação Orientada a Objetos**
+- **Coleções (`ArrayList`)** para armazenar e manipular dados
+- **Pacotes** para organização do código
 
-1. Compile os arquivos Java:
-   ```bash
-   javac *.java
+---
+
+## Conceitos de POO Aplicados 📚
+- **Encapsulamento**: atributos privados e métodos públicos de acesso.  
+- **Herança**: `Musica` e `Podcast` herdam de `Midia`.  
+- **Polimorfismo**: tratamento genérico de diferentes tipos de mídias.  
+- **Abstração**: `Midia` como classe base genérica.  
+
+---
