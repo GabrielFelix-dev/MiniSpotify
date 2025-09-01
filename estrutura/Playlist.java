@@ -22,16 +22,6 @@ public class Playlist {
     midias.remove(nomeMidia);
   }
 
-  public void exibirMidia() {
-    if (midias.isEmpty()) {
-      System.out.println("Não há midias cadastradas.");
-    } else {
-      System.out.println("\nTodas as midias: ");
-      for (Midia midia2 : midias) {
-        System.out.println(" - " + midia2.getTitulo());
-      }
-    }
-  }
 
   public double calculatorTime() {
     double sum = 0.0;
