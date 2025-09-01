@@ -27,7 +27,7 @@ public class Main {
                 System.out.println("7 - Remover midia"); // Remover midia de uma PL ou do catalogo(Interfere TODAS as playlist).
                 System.out.println("8 - Listar midias"); 
                 System.out.println("9 - Listar midias de uma playlist");
-                System.out.println("10 - Buscar midia"); // Busca midia por titulo, artista ou genero.
+                System.out.println("10 - Buscar midia"); // Busca midia por titulo
                 System.out.println("11 - Sair");
                 System.out.print("Escolha uma opção: ");
 
@@ -58,10 +58,17 @@ public class Main {
                     case 6 -> {
                         sistema.addMidiaPlaylist(scanner);
                     }
-                    
-                    
-                    case 10 -> {
-                        System.out.println("Saindo do sistema...");
+                    case 7 -> { // Remover mídia
+                        sistema.removerMidia(scanner);
+                    }
+                    case 8 -> { // Listar todas as mídias do catálogo
+                        sistema.listarMidias();
+                    }
+                    case 9 -> { // Listar mídias de uma playlist
+                        sistema.listarMidiasPlaylist(scanner);
+                    }
+                    case 10 -> { // Buscar mídia
+                        sistema.buscarMidia(scanner);
                     }
                     default -> System.out.println("Opção inválida.");
                 }
