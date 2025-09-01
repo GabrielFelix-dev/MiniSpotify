@@ -21,39 +21,48 @@ public class Main {
                 System.out.println("1 - Criar Usuário");
                 System.out.println("2 - Criar Playlist");
                 System.out.println("3 - Remover Playlist");// Remover PL especifica.
-                System.out.println("4 - Listar Playlists ou uma especifica"); // Listar todas as PL ou uma especifica (listar as midias).
+                System.out.println("4 - Listar Playlists ou uma especifica"); // Listar todas as PL.
                 System.out.println("5 - Adicionar midia ao catalogo"); // Add midia ao catalogo global.
                 System.out.println("6 - Adicionar midia a uma playlist"); // Add midia a uma PL especifica.
                 System.out.println("7 - Remover midia"); // Remover midia de uma PL ou do catalogo(Interfere TODAS as playlist).
                 System.out.println("8 - Listar midias"); 
-                System.out.println("9 - Buscar midia"); // Busca midia por titulo, artista ou genero.
-                System.out.println("10 - Sair");
+                System.out.println("9 - Listar midias de uma playlist");
+                System.out.println("10 - Buscar midia"); // Busca midia por titulo, artista ou genero.
+                System.out.println("11 - Sair");
                 System.out.print("Escolha uma opção: ");
 
                 opcao = scanner.nextInt();
                 scanner.nextLine();
 
                 switch (opcao) {
+                    // ok
                     case 1 -> {
                         sistema.criarUsuario(scanner);
                     }
+                    // ok
                     case 2 -> {
                         sistema.criarPlaylist(scanner);
                     }
+                    // ok
                     case 3 -> {
-                        System.out.print("Digite o nome da playlist a ser removida: ");
-                        String playlistRemover = scanner.nextLine();
-                     //   sistema.removerPlaylist(playlistRemover);
+                        sistema.removerPlaylist(scanner);
                     }
+                    // ok
                     case 4 -> {
                         sistema.listarPlaylists(scanner);
                     }
+                    // ok +/-
                     case 5 -> {
                         sistema.adicionarMidiaCatalogo(scanner);
                     }
+                    case 6 -> {
+                        sistema.addMidiaPlaylist(scanner);
+                    }
                     
                     
-                    case 10 -> System.out.println("Saindo do sistema...");
+                    case 10 -> {
+                        System.out.println("Saindo do sistema...");
+                    }
                     default -> System.out.println("Opção inválida.");
                 }
 
@@ -65,7 +74,7 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
             }
-        } while (opcao != 9);
+        } while (opcao != 11);
 
         scanner.close();
     }
