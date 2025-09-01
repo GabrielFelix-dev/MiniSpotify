@@ -7,11 +7,13 @@ public class Catalogo {
     private Set<Midia> midias;
 
 
+    
+    
     public Catalogo() {
         this.midias = new HashSet<>();
     }
-
-
+    
+    
     public void adicionarMidia(Midia m) {
         if (midias.add(m)) {
             System.out.println("Adicionado: " + m.getTitulo());
@@ -19,47 +21,30 @@ public class Catalogo {
             System.out.println("Essa mídia já existe no catálogo.");
         }
     }
-
-
-    public void buscarPorTitulo(String titulo) {
-        boolean achei = false;
+    
+    public void exibirMidia() {
+        if (midias.isEmpty()) {
+            System.out.println("Não há midias cadastradas.");
+        } else {
+            System.out.println("\nTodas as midias: ");
+            for (Midia midia2 : midias) {
+                System.out.println(" - " + midia2.getTitulo());
+            }
+        }
+    }
+    
+    // Busca e retorna a mídia pelo título
+    public Midia buscarMidiaPorTitulo(String titulo) {
         for (Midia m : midias) {
             if (m.getTitulo().equalsIgnoreCase(titulo)) {
-                System.out.println("Achei: " + m);
-                achei = true;
+                return m; // Retorna a mídia encontrada
             }
         }
-        if (!achei) {
-            System.out.println("Nenhuma mídia com esse título.");
-        }
+        return null; // Retorna null se não encontrar
     }
-
-
-    public void buscarPorArtista(String artista) {
-        boolean achei = false;
-        for (Midia m : midias) {
-            if (m.getArtista().equalsIgnoreCase(artista)) {
-                System.out.println("Achei: " + m);
-                achei = true;
-            }
-        }
-        if (!achei) {
-            System.out.println("Nenhuma mídia desse artista.");
-        }
+    
+        
+    public Set<Midia> getMidias() {
+        return midias;
     }
-
-
-    public void buscarPorGenero(Genero genero) {
-        boolean achei = false;
-        for (Midia m : midias) {
-            if (m.getGenero() == genero) {
-                System.out.println("Achei: " + m);
-                achei = true;
-            }
-        }
-        if (!achei) {
-            System.out.println("Nenhuma mídia desse gênero.");
-        }
-    }
-
 }
