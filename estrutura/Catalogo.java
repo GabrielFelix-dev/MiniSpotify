@@ -37,7 +37,7 @@ public class Catalogo {
     public Midia buscarMidiaPorTitulo(String titulo) {
         for (Midia m : midias) {
             if (m.getTitulo().equalsIgnoreCase(titulo)) {
-                return m; // Retorna a mídia encontrada
+                return m; // Retorna a mídia encontrad
             }
         }
         return null; // Retorna null se não encontrar
