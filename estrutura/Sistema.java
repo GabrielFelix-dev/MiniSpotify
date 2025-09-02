@@ -12,16 +12,12 @@ public class Sistema {
     private Scanner scanner = new Scanner(System.in);
 
     private ArrayList<Usuario> usuarios; // Lista de todos os usuários do sistema
-    private Catalogo catalogo;           // Catálogo global de mídias
+    private Catalogo catalogo; // Catálogo global de mídias
 
     public Sistema() {
         this.usuarios = new ArrayList<>();
         this.catalogo = new Catalogo();
     }
-
-    // ======================
-    // Usuários
-    // ======================
 
     // Verifica se um usuário existe pelo nome
     public boolean usuarioExiste(String nome) {
@@ -61,10 +57,6 @@ public class Sistema {
         String email = scanner.nextLine();
         cadastrarUsuario(nome, email);
     }
-
-    // ======================
-    // Playlists
-    // ======================
 
     // Criar playlist para um usuário específico
     public void criarPlaylist(Scanner scanner) throws UsuarioInexistentException, PlaylistInvalidaException {
@@ -128,71 +120,70 @@ public class Sistema {
 
         user.exibirPlaylist();
     }
- 
-    
+
     public void removerMidia(Scanner scanner) {
         System.out.print("Digite o título da mídia que deseja remover: ");
         String titulo = scanner.nextLine();
-        
+
         Midia midia = catalogo.buscarMidiaPorTitulo(titulo);
         if (midia == null) {
             System.out.println("Mídia não encontrada no catálogo.");
             return;
         }
-        
+
         // Remove de todas as playlists de todos os usuários
         for (Usuario user : usuarios) {
             for (Playlist pl : user.getPlaylist()) {
                 pl.getMidias().remove(midia);
             }
         }
-        
+
         // Remove do catálogo
         catalogo.getMidias().remove(midia);
         System.out.println("Mídia '" + titulo + "' removida com sucesso do catálogo e de todas as playlists.");
-    }    
-    
+    }
+
     // Adicionar mídia ao catálogo global
     public void adicionarMidiaCatalogo(Scanner scanner) throws UsuarioInexistentException {
         System.out.println("""
-            -------- Escolha o tipo de midia --------
-            1) Audiobook
-            2) Podcast
-            3) Musica
-            """);
-            System.out.print("Escolha: ");
-            int opcao = scanner.nextInt();
-            scanner.nextLine();
-            
-            switch (opcao) {
-                case 1 -> { // Audiobook
-                    System.out.print("Digite o título do Audiobook: ");
-                    String titulo = scanner.nextLine();
-                    System.out.print("Autor da obra: ");
-                    String artista = scanner.nextLine();
-                    System.out.print("Duração: ");
-                    double duracao = scanner.nextDouble();
-                    scanner.nextLine();
-                    
-                    // Escolher gênero
-                    System.out.println("Escolha um gênero para o Audiobook:");
-                    Genero[] generos = Genero.values();
-                    for (int i = 0; i < generos.length; i++) {
-                        if (generos[i].getTipo().equals("AUDIOBOOK")) {
-                            System.out.println(i + ") " + generos[i]);
-                        }
+                -------- Escolha o tipo de midia --------
+                1) Audiobook
+                2) Podcast
+                3) Musica
+                """);
+        System.out.print("Escolha: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (opcao) {
+            case 1 -> { // Audiobook
+                System.out.print("Digite o título do Audiobook: ");
+                String titulo = scanner.nextLine();
+                System.out.print("Autor da obra: ");
+                String artista = scanner.nextLine();
+                System.out.print("Duração: ");
+                double duracao = scanner.nextDouble();
+                scanner.nextLine();
+
+                // Escolher gênero
+                System.out.println("Escolha um gênero para o Audiobook:");
+                Genero[] generos = Genero.values();
+                for (int i = 0; i < generos.length; i++) {
+                    if (generos[i].getTipo().equals("AUDIOBOOK")) {
+                        System.out.println(i + ") " + generos[i]);
                     }
-                    int escolha = scanner.nextInt();
-                    scanner.nextLine();
-                    Genero generoEscolhido = generos[escolha];
-                    
-                    System.out.print("Narrador: ");
-                    String narrador = scanner.nextLine();
-                    
-                    Audiobook audiobook = new Audiobook(titulo, artista, duracao, generoEscolhido, narrador);
-                    catalogo.adicionarMidia(audiobook);
                 }
-                case 2 -> { // Podcast
+                int escolha = scanner.nextInt();
+                scanner.nextLine();
+                Genero generoEscolhido = generos[escolha];
+
+                System.out.print("Narrador: ");
+                String narrador = scanner.nextLine();
+
+                Audiobook audiobook = new Audiobook(titulo, artista, duracao, generoEscolhido, narrador);
+                catalogo.adicionarMidia(audiobook);
+            }
+            case 2 -> { // Podcast
                 System.out.print("Digite o título do Podcast: ");
                 String titulo = scanner.nextLine();
                 System.out.print("Apresentador(es): ");
@@ -200,7 +191,7 @@ public class Sistema {
                 System.out.print("Duração: ");
                 double duracao = scanner.nextDouble();
                 scanner.nextLine();
-                
+
                 System.out.println("Escolha um gênero:");
                 Genero[] generos = Genero.values();
                 for (int i = 0; i < generos.length; i++) {
@@ -211,12 +202,12 @@ public class Sistema {
                 int escolha = scanner.nextInt();
                 scanner.nextLine();
                 Genero generoEscolhido = generos[escolha];
-                
+
                 System.out.print("Possui convidado(s)? 1) Sim 2) Não: ");
                 int opt = scanner.nextInt();
                 scanner.nextLine();
                 String convidados = (opt == 1) ? scanner.nextLine() : "Sem convidados";
-                
+
                 Podcast podcast = new Podcast(titulo, artista, duracao, generoEscolhido, convidados);
                 catalogo.adicionarMidia(podcast);
             }
@@ -228,7 +219,7 @@ public class Sistema {
                 System.out.print("Duração: ");
                 double duracao = scanner.nextDouble();
                 scanner.nextLine();
-                
+
                 System.out.println("Escolha um gênero:");
                 Genero[] generos = Genero.values();
                 for (int i = 0; i < generos.length; i++) {
@@ -239,33 +230,32 @@ public class Sistema {
                 int escolha = scanner.nextInt();
                 scanner.nextLine();
                 Genero generoEscolhido = generos[escolha];
-                
+
                 System.out.print("Pertence a algum álbum? 1) Sim 2) Não: ");
                 int opt = scanner.nextInt();
                 scanner.nextLine();
                 String album = (opt == 1) ? scanner.nextLine() : "Não possui álbum";
-                
+
                 Musica musica = new Musica(titulo, artista, duracao, generoEscolhido, album);
                 catalogo.adicionarMidia(musica);
             }
             default -> System.out.println("Opção inválida!");
         }
     }
-    
-    
+
     // Adicionar mídia a uma playlist
     public void addMidiaPlaylist(Scanner scanner) throws UsuarioInexistentException, PlaylistInvalidaException {
         System.out.print("Digite seu nome de usuário: ");
         String nome = scanner.nextLine();
         Usuario user = buscarUsuario(nome);
-        
+
         if (user == null) {
             throw new UsuarioInexistentException("Usuário não encontrado!");
         }
-        
+
         System.out.print("Digite o nome da playlist: ");
         String nomePL = scanner.nextLine();
-        
+
         Playlist playlistSelecionada = null;
         for (Playlist pl : user.getPlaylist()) {
             if (pl.getnomePlaylist().equalsIgnoreCase(nomePL)) {
@@ -273,18 +263,18 @@ public class Sistema {
                 break;
             }
         }
-        
+
         if (playlistSelecionada == null) {
             throw new PlaylistInvalidaException("Playlist não encontrada.");
         }
-        
+
         // Mostrar todas as mídias do catálogo
         System.out.println("\nMídias disponíveis no catálogo:");
         catalogo.exibirMidia();
-        
+
         System.out.print("Digite o título da mídia que deseja adicionar: ");
         String tituloMidia = scanner.nextLine();
-        
+
         // Buscar a mídia no catálogo
         Midia midiaSelecionada = catalogo.buscarMidiaPorTitulo(tituloMidia);
         if (midiaSelecionada != null) {
@@ -294,13 +284,13 @@ public class Sistema {
             System.out.println("Mídia não encontrada no catálogo.");
         }
     }
-    
-    // Listar todas as midias 
+
+    // Listar todas as midias
     public void listarMidias() {
         catalogo.exibirMidia();
     }
-    
-    //Listar midias de umaplaylist
+
+    // Listar midias de umaplaylist
     public void listarMidiasPlaylist(Scanner scanner) throws UsuarioInexistentException, PlaylistInvalidaException {
         System.out.print("Digite seu nome de usuário: ");
         String nome = scanner.nextLine();
@@ -334,6 +324,7 @@ public class Sistema {
             }
         }
     }
+
     public void buscarMidia(Scanner scanner) {
         System.out.print("Digite o título da mídia: ");
         String titulo = scanner.nextLine();

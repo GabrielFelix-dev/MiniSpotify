@@ -11,8 +11,12 @@ public class Musica extends Midia {
         this.album = album;
     }
 
-    public String getAlbum() { return album; }
-    public void setAlbum(String album) { this.album = album; }
+    public String getAlbum() {
+         return album;
+    }
+    public void setAlbum(String album) {
+        this.album = album; 
+    }
 
     @Override
     public String toString() {

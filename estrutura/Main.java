@@ -21,7 +21,7 @@ public class Main {
                 System.out.println("1 - Criar Usuário");
                 System.out.println("2 - Criar Playlist");
                 System.out.println("3 - Remover Playlist");// Remover PL especifica.
-                System.out.println("4 - Listar Playlists ou uma especifica"); // Listar todas as PL.
+                System.out.println("4 - Listar Playlists"); // Listar todas as PL.
                 System.out.println("5 - Adicionar midia ao catalogo"); // Add midia ao catalogo global.
                 System.out.println("6 - Adicionar midia a uma playlist"); // Add midia a uma PL especifica.
                 System.out.println("7 - Remover midia"); // Remover midia de uma PL ou do catalogo(Interfere TODAS as playlist).
@@ -35,27 +35,22 @@ public class Main {
                 scanner.nextLine();
 
                 switch (opcao) {
-                    // ok
-                    case 1 -> {
+                    case 1 -> { // Criar Usuário
                         sistema.criarUsuario(scanner);
                     }
-                    // ok
-                    case 2 -> {
+                    case 2 -> { // Criar Playlist
                         sistema.criarPlaylist(scanner);
                     }
-                    // ok
-                    case 3 -> {
+                    case 3 -> { // Remover Playlist
                         sistema.removerPlaylist(scanner);
                     }
-                    // ok
-                    case 4 -> {
+                    case 4 -> { // Listar Playlists ou uma especifica
                         sistema.listarPlaylists(scanner);
                     }
-                    // ok +/-
-                    case 5 -> {
+                    case 5 -> { // Adicionar midia ao catalogo
                         sistema.adicionarMidiaCatalogo(scanner);
                     }
-                    case 6 -> {
+                    case 6 -> { // Adicionar midia a uma playlist
                         sistema.addMidiaPlaylist(scanner);
                     }
                     case 7 -> { // Remover mídia
