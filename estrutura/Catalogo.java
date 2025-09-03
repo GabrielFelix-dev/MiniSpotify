@@ -4,10 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Catalogo {
+
     private Set<Midia> midias;
 
-
-    
     
     public Catalogo() {
         this.midias = new HashSet<>();

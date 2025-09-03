@@ -121,6 +121,7 @@ public class Sistema {
         user.exibirPlaylist();
     }
 
+    // Remove midias
     public void removerMidia(Scanner scanner) {
         System.out.print("Digite o título da mídia que deseja remover: ");
         String titulo = scanner.nextLine();
@@ -206,10 +207,15 @@ public class Sistema {
                 System.out.print("Possui convidado(s)? 1) Sim 2) Não: ");
                 int opt = scanner.nextInt();
                 scanner.nextLine();
-                String convidados = (opt == 1) ? scanner.nextLine() : "Sem convidados";
-
-                Podcast podcast = new Podcast(titulo, artista, duracao, generoEscolhido, convidados);
-                catalogo.adicionarMidia(podcast);
+                if (opt == 1) {
+                    System.out.println("Insira o(s) nome(s) do(s) conviado(s): ");
+                    String convidados = scanner.nextLine();
+                    Podcast podcast = new Podcast(titulo, artista, duracao, generoEscolhido, convidados);
+                    catalogo.adicionarMidia(podcast);
+                   
+                } else {
+                Podcast podcast = new Podcast(titulo, artista, duracao, generoEscolhido, "Sem convidados");
+                }
             }
             case 3 -> { // Música
                 System.out.print("Digite o nome da música: ");
@@ -234,10 +240,15 @@ public class Sistema {
                 System.out.print("Pertence a algum álbum? 1) Sim 2) Não: ");
                 int opt = scanner.nextInt();
                 scanner.nextLine();
-                String album = (opt == 1) ? scanner.nextLine() : "Não possui álbum";
-
-                Musica musica = new Musica(titulo, artista, duracao, generoEscolhido, album);
-                catalogo.adicionarMidia(musica);
+                if (opt == 1) {
+                    System.out.println("Insira o nome do album: ");
+                    String album = scanner.nextLine();
+                    Musica musica = new Musica(titulo, artista, duracao, generoEscolhido, album);
+                    catalogo.adicionarMidia(musica);
+                } else {
+                    Musica musica = new Musica(titulo, artista, duracao, generoEscolhido, "Sem album");                    
+                    catalogo.adicionarMidia(musica);
+                }
             }
             default -> System.out.println("Opção inválida!");
         }
@@ -280,7 +291,7 @@ public class Sistema {
         if (midiaSelecionada != null) {
             playlistSelecionada.addMidia(midiaSelecionada);
             System.out.println("Mídia adicionada com sucesso à playlist '" + nomePL + "'!");
-        } else {
+        } else { 
             System.out.println("Mídia não encontrada no catálogo.");
         }
     }
